@@ -38,8 +38,10 @@ const upload = () => {
     setStatusText("Converting to image...");
 
     const imageFile = await convertPdfToImage(file);
-    if (!imageFile.file)
+    if (!imageFile.file) {
+      console.log("Error: Failed to convert PDF to image" + imageFile.error);
       return setStatusText("Error: Failed to convert PDF to image");
+    }
 
     setStatusText("Uploading the image...");
     const uploadedImage = await fs.upload([imageFile.file]);
@@ -104,7 +106,7 @@ const upload = () => {
     <main className="bg-[url(/images/bg-main.svg)] bg-cover">
       <Navbar />
       <section className="main-section">
-        <div className="page-heading py-8">
+        <div className="page-heading py-4">
           <h1>Smart feedback for your dream job!</h1>
           {isProcessing ? (
             <>
@@ -122,7 +124,7 @@ const upload = () => {
             <form
               id="upload-form"
               onSubmit={handleSubmit}
-              className="flex flex-col gap-4 mt-8"
+              className="flex flex-col gap-4 mt-4"
             >
               <div className="form-div">
                 <label htmlFor="company-name">Company Name</label>
