@@ -2,11 +2,5 @@
   "buildCommand": "npm run build",
   "outputDirectory": "build/server",
   "devCommand": "npm run dev",
-  "framework": "other",
-  "functions": {
-    "api/**/*.ts": {
-      "memory": 1024,
-      "maxDuration": 60
-    }
-  }
+  "framework": "react-router"
 }
