@@ -1,6 +1,6 @@
 import React from "react";
 import ScoreBadge from "./ScoreBadge";
-import ScoreGauge from "./scoreGauge";
+import ScoreGauge from "./ScoreGauge";
 
 const getScoreColor = (score: number) => {
   if (score > 70) return "#059669";
