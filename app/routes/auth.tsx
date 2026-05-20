@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router";
 import { usePuterStore } from "~/lib/puter";
 
 export const meta = () => [
-  { title: "Resumind | Auth" },
+  { title: "CVLens | Auth" },
   { name: "description", content: "Log into your account" },
 ];
 
@@ -33,7 +33,9 @@ const auth = () => {
           <div className="flex flex-col items-center gap-2 text-center">
             <div
               className="w-12 h-12 rounded-2xl flex items-center justify-center mb-1"
-              style={{ background: "linear-gradient(135deg, #3b82f6, #6366f1)" }}
+              style={{
+                background: "linear-gradient(135deg, #3b82f6, #6366f1)",
+              }}
             >
               <span className="text-white font-bold text-lg">R</span>
             </div>
