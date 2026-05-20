@@ -56,22 +56,22 @@ const resume = () => {
       <div className="flex flex-row w-full max-lg:flex-col-reverse">
         {/* Left — resume preview */}
         <section
-          className="feedback-section h-screen sticky top-0 items-center justify-center overflow-hidden"
+          className="feedback-section lg:h-screen lg:sticky lg:top-0 items-center justify-center overflow-hidden"
           style={{ background: "rgba(255,255,255,0.02)" }}
         >
           {imageUrl && resumeUrl ? (
-            <div className="animate-in fade-in duration-700 gradient-border h-[90%] w-fit max-w-full">
+            <div className="animate-in fade-in duration-700 gradient-border lg:h-[90%] w-fit max-w-full">
               <a href={resumeUrl} target="_blank" rel="noopener noreferrer">
                 <img
                   src={imageUrl}
                   alt="Resume preview"
-                  className="w-full h-full object-contain rounded-xl"
+                  className="w-full lg:h-full max-lg:max-h-[65vh] object-contain rounded-xl"
                   title="Click to open PDF"
                 />
               </a>
             </div>
           ) : (
-            <div className="flex items-center justify-center h-full">
+            <div className="flex items-center justify-center lg:h-full max-lg:py-6">
               <img
                 src="/images/resume-scan-2.gif"
                 alt="Loading…"
@@ -84,8 +84,8 @@ const resume = () => {
         {/* Right — feedback */}
         <section className="feedback-section overflow-y-auto">
           <p
-            className="font-bold"
-            style={{ fontSize: "1.25rem", color: "#ffffff" }}
+            className="font-bold text-lg sm:text-xl"
+            style={{ color: "#ffffff" }}
           >
             Resume Review
           </p>
