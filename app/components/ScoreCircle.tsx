@@ -1,40 +1,39 @@
 const ScoreCircle = ({ score = 75 }: { score: number }) => {
-  const radius = 40;
-  const stroke = 8;
+  const radius = 38;
+  const stroke = 7;
   const normalizedRadius = radius - stroke / 2;
   const circumference = 2 * Math.PI * normalizedRadius;
   const progress = score / 100;
   const strokeDashoffset = circumference * (1 - progress);
 
+  const ringColor =
+    score > 70 ? "#10b981" : score > 49 ? "#f59e0b" : "#ef4444";
+  const textColor =
+    score > 70 ? "#10b981" : score > 49 ? "#f59e0b" : "#ef4444";
+
   return (
-    <div className="relative w-[100px] h-[100px]">
+    <div className="relative w-16 h-16">
       <svg
         height="100%"
         width="100%"
-        viewBox="0 0 100 100"
+        viewBox="0 0 76 76"
         className="transform -rotate-90"
       >
-        {/* Background circle */}
+        {/* Background ring */}
         <circle
-          cx="50"
-          cy="50"
+          cx="38"
+          cy="38"
           r={normalizedRadius}
-          stroke="#e5e7eb"
+          stroke="rgba(255,255,255,0.1)"
           strokeWidth={stroke}
           fill="transparent"
         />
-        {/* Partial circle with gradient */}
-        <defs>
-          <linearGradient id="grad" x1="1" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FF97AD" />
-            <stop offset="100%" stopColor="#5171FF" />
-          </linearGradient>
-        </defs>
+        {/* Progress ring */}
         <circle
-          cx="50"
-          cy="50"
+          cx="38"
+          cy="38"
           r={normalizedRadius}
-          stroke="url(#grad)"
+          stroke={ringColor}
           strokeWidth={stroke}
           fill="transparent"
           strokeDasharray={circumference}
@@ -42,10 +41,11 @@ const ScoreCircle = ({ score = 75 }: { score: number }) => {
           strokeLinecap="round"
         />
       </svg>
-
-      {/* Score and issues */}
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="font-semibold text-sm">{`${score}/100`}</span>
+        <span className="font-bold text-xs" style={{ color: textColor }}>
+          {score}
+        </span>
+        <span className="text-[9px] text-blue-300 leading-none">/100</span>
       </div>
     </div>
   );

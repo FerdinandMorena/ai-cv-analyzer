@@ -10,15 +10,16 @@ const ATS = ({
   return (
     <div
       className={cn(
-        "rounded-2xl shadow-md w-full bg-gradient-to-b to-light-white p-8 flex flex-col gap-4",
+        "rounded-2xl w-full p-5 flex flex-col gap-3",
         score > 69
-          ? "from-green-100"
+          ? "bg-gradient-to-b from-green-50 to-white border border-green-100"
           : score > 49
-            ? "from-yellow-100"
-            : "from-red-100",
+            ? "bg-gradient-to-b from-yellow-50 to-white border border-yellow-100"
+            : "bg-gradient-to-b from-red-50 to-white border border-red-100",
       )}
+      style={{ boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}
     >
-      <div className="flex flex-row gap-4 items-center">
+      <div className="flex flex-row gap-3 items-center">
         <img
           src={
             score > 69
@@ -28,43 +29,48 @@ const ATS = ({
                 : "/icons/ats-bad.svg"
           }
           alt="ATS"
-          className="w-10 h-10"
+          className="w-8 h-8 shrink-0"
         />
-        <p className="text-2xl font-semibold">ATS Score - {score}/100</p>
-      </div>
-      <div className="flex flex-col gap-2">
-        <p className="font-medium text-xl">
-          How well does your resume pass through Applicant Tracking Systems?
+        <p className="text-base font-bold text-navy-900">
+          ATS Score &mdash; {score}/100
         </p>
-        <p className="text-lg text-gray-500">
+      </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="font-semibold text-sm text-navy-800">
+          How well does your resume pass Applicant Tracking Systems?
+        </p>
+        <p className="text-sm text-text-muted">
           Your resume was scanned like an employer would. Here's how it
           performed:
         </p>
-        {suggestions.map((suggestion, index) => (
-          <div className="flex flex-row gap-2 items-center" key={index}>
-            <img
-              src={
-                suggestion.type === "good"
-                  ? "/icons/check.svg"
-                  : "/icons/warning.svg"
-              }
-              alt="ATS"
-              className="w-4 h-4"
-            />
-            <p
-              className={
-                suggestion.type === "good"
-                  ? "text-green-600"
-                  : "text-yellow-600"
-              }
-            >
-              {suggestion.tip}
-            </p>
-          </div>
-        ))}
-        <p className="text-lg text-gray-500">
-          Want a better score? Improve your resume by applying the suggestions
-          listed below.
+        <ul className="flex flex-col gap-1.5 mt-1">
+          {suggestions.map((suggestion, index) => (
+            <li className="flex flex-row gap-2 items-start" key={index}>
+              <img
+                src={
+                  suggestion.type === "good"
+                    ? "/icons/check.svg"
+                    : "/icons/warning.svg"
+                }
+                alt={suggestion.type}
+                className="w-4 h-4 mt-0.5 shrink-0"
+              />
+              <p
+                className={cn(
+                  "text-sm",
+                  suggestion.type === "good"
+                    ? "text-green-700"
+                    : "text-yellow-700",
+                )}
+              >
+                {suggestion.tip}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <p className="text-xs text-text-muted mt-1">
+          Want a better score? Apply the improvement suggestions listed below.
         </p>
       </div>
     </div>

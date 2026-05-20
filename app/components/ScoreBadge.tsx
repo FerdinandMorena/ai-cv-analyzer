@@ -9,10 +9,10 @@ const ScoreBadge: React.FC<ScoreBadgeProps> = ({ score }) => {
   let label: string;
 
   if (score > 70) {
-    badgeColor = "bg-green-100 text-green-600";
+    badgeColor = "bg-emerald-100 text-emerald-700";
     label = "Strong";
   } else if (score > 49) {
-    badgeColor = "bg-yellow-100 text-yellow-600";
+    badgeColor = "bg-amber-100 text-amber-700";
     label = "Good Start";
   } else {
     badgeColor = "bg-red-100 text-red-600";
@@ -20,8 +20,8 @@ const ScoreBadge: React.FC<ScoreBadgeProps> = ({ score }) => {
   }
 
   return (
-    <div className={`px-3 py-1 rounded-full ${badgeColor}`}>
-      <p className="text-sm font-semibold">{label}</p>
+    <div className={`px-2 py-0.5 rounded-full ${badgeColor}`}>
+      <p className="text-xs font-semibold">{label}</p>
     </div>
   );
 };

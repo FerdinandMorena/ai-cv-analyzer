@@ -10,7 +10,7 @@ const ScoreBadge = ({ score }: { score: number }) => {
   return (
     <div
       className={cn(
-        "flex flex-row gap-1 items-center px-2 py-0.5 rounded-[96px]",
+        "flex flex-row gap-1 items-center px-2 py-0.5 rounded-full",
         score > 69
           ? "bg-badge-green"
           : score > 39
@@ -21,11 +21,11 @@ const ScoreBadge = ({ score }: { score: number }) => {
       <img
         src={score > 69 ? "/icons/check.svg" : "/icons/warning.svg"}
         alt="score"
-        className="size-4"
+        className="size-3.5"
       />
       <p
         className={cn(
-          "text-sm font-medium",
+          "text-xs font-medium",
           score > 69
             ? "text-badge-green-text"
             : score > 39
@@ -47,8 +47,8 @@ const CategoryHeader = ({
   categoryScore: number;
 }) => {
   return (
-    <div className="flex flex-row gap-4 items-center py-2">
-      <p className="text-2xl font-semibold">{title}</p>
+    <div className="flex flex-row gap-3 items-center py-1.5">
+      <p className="text-base font-semibold text-navy-900">{title}</p>
       <ScoreBadge score={categoryScore} />
     </div>
   );
@@ -60,30 +60,33 @@ const CategoryContent = ({
   tips: { type: "good" | "improve"; tip: string; explanation: string }[];
 }) => {
   return (
-    <div className="flex flex-col gap-4 items-center w-full">
-      <div className="bg-gray-50 w-full rounded-lg px-5 py-4 grid grid-cols-2 gap-4">
+    <div className="flex flex-col gap-3 items-center w-full pb-2">
+      {/* Quick summary chips */}
+      <div className="bg-slate-50 w-full rounded-xl px-4 py-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
         {tips.map((tip, index) => (
           <div className="flex flex-row gap-2 items-center" key={index}>
             <img
               src={
                 tip.type === "good" ? "/icons/check.svg" : "/icons/warning.svg"
               }
-              alt="score"
-              className="size-5"
+              alt={tip.type}
+              className="size-4 shrink-0"
             />
-            <p className="text-xl text-gray-500 ">{tip.tip}</p>
+            <p className="text-sm text-text-muted">{tip.tip}</p>
           </div>
         ))}
       </div>
-      <div className="flex flex-col gap-4 w-full">
+
+      {/* Detailed cards */}
+      <div className="flex flex-col gap-2.5 w-full">
         {tips.map((tip, index) => (
           <div
             key={index + tip.tip}
             className={cn(
-              "flex flex-col gap-2 rounded-2xl p-4",
+              "flex flex-col gap-1.5 rounded-xl p-3.5",
               tip.type === "good"
-                ? "bg-green-50 border border-green-200 text-green-700"
-                : "bg-yellow-50 border border-yellow-200 text-yellow-700",
+                ? "bg-green-50 border border-green-100 text-green-700"
+                : "bg-amber-50 border border-amber-100 text-amber-700",
             )}
           >
             <div className="flex flex-row gap-2 items-center">
@@ -93,12 +96,12 @@ const CategoryContent = ({
                     ? "/icons/check.svg"
                     : "/icons/warning.svg"
                 }
-                alt="score"
-                className="size-5"
+                alt={tip.type}
+                className="size-4 shrink-0"
               />
-              <p className="text-xl font-semibold">{tip.tip}</p>
+              <p className="text-sm font-semibold">{tip.tip}</p>
             </div>
-            <p>{tip.explanation}</p>
+            <p className="text-sm leading-relaxed pl-6">{tip.explanation}</p>
           </div>
         ))}
       </div>
@@ -108,12 +111,20 @@ const CategoryContent = ({
 
 const Details = ({ feedback }: { feedback: Feedback }) => {
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div
+      className="flex flex-col gap-1 w-full rounded-2xl overflow-hidden"
+      style={{
+        background: "rgba(255,255,255,0.85)",
+        backdropFilter: "blur(16px)",
+        border: "1px solid rgba(148,163,184,0.15)",
+        boxShadow: "0 2px 16px rgba(59,130,246,0.06)",
+      }}
+    >
       <Accordion>
         <AccordionItem id="tone-style">
           <AccordionHeader itemId="tone-style">
             <CategoryHeader
-              title="Tone & Style"
+              title="Tone &amp; Style"
               categoryScore={feedback.toneAndStyle.score}
             />
           </AccordionHeader>

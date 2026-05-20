@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Resumind" },
+    { title: "CVLens" },
     { name: "description", content: "Smart feedback for your dream job!" },
   ];
 }
@@ -31,8 +31,6 @@ export default function Home() {
       const parsedResumes = allResumes?.map(
         (resume) => JSON.parse(resume.value) as Resume,
       );
-
-      console.log("Loaded resumes:", parsedResumes);
       setResumes(parsedResumes || []);
       setLoadingResumes(false);
     };
@@ -41,11 +39,13 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-[url(/images/bg-main.svg)] bg-cover">
-      <Navbar />
+    <main className="app-bg pt-4">
+      <div className="sticky top-0 z-20 px-4 sm:px-6 py-3">
+        <Navbar />
+      </div>
       <section className="main-section">
         <div className="page-heading py-6">
-          <h1>Track Your Applications & CV Ratings</h1>
+          <h1>Track Your Applications &amp; CV Ratings</h1>
           {!loadingResumes && resumes.length === 0 ? (
             <h2>No resumes found. Upload your first resume to get feedback.</h2>
           ) : (
@@ -54,10 +54,15 @@ export default function Home() {
         </div>
 
         {loadingResumes && (
-          <div className="flex flex-col items-center justify-center">
-            <img src="/images/resume-scan-2.gif" className="w-[200px]" alt="" />
+          <div className="flex flex-col items-center justify-center py-10">
+            <img
+              src="/images/resume-scan-2.gif"
+              className="w-36 sm:w-44"
+              alt="Loading..."
+            />
           </div>
         )}
+
         {!loadingResumes && resumes.length > 0 && (
           <div className="resumes-section">
             {resumes.map((resume) => (
@@ -67,11 +72,8 @@ export default function Home() {
         )}
 
         {!loadingResumes && resumes.length === 0 && (
-          <div className="flex flex-col items-center justify-center mt-10 gap-4">
-            <Link
-              to="/upload"
-              className="primary-button w-fit text-xl font-semibold"
-            >
+          <div className="flex flex-col items-center mt-8">
+            <Link to="/upload" className="primary-button w-fit">
               Upload Your Resume
             </Link>
           </div>
