@@ -42,7 +42,7 @@ const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
       }}
     >
       <div
-        className="w-9 h-9 rounded-lg flex w-full items-center justify-center shrink-0"
+        className="w-9 h-9 rounded-lg flex  items-center justify-center shrink-0"
         style={{ background: "rgba(16,185,129,0.12)" }}
       >
         <img src="/images/pdf.webp" alt="pdf" className="w-6 h-6" />
